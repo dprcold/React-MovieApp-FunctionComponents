@@ -1,0 +1,29 @@
+
+@media (min-width: 1025px){
+    .wrapper{
+        padding-top: 20px;
+        display: flex;
+        margin: 0 auto;
+        flex-wrap: wrap; /* Разрешает перенос элементов на новую строку */
+        gap: 36px;
+     
+    }
+    .spin{
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+}
+@media  (min-width: 388px ) and (max-width: 1024px){
+    .wrapper{
+        padding-top: 10px;
+        display: flex;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        gap: 15px;
+        width: 388px;
+    }
+    .spin{
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+}

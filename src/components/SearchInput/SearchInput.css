@@ -1,0 +1,24 @@
+@media (min-width: 1025px) {
+    .input-wrapper{
+        width: 938px;
+        margin: 0 auto;
+    }
+  }
+  .cardsPagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+   }
+   @media  (min-width: 388px ) and (max-width: 1024px){
+    .input-wrapper{
+      width: 388px;
+      margin: 0 auto;
+  }
+  .cardsPagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+   }
+   }

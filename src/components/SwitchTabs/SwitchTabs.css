@@ -1,0 +1,36 @@
+
+
+
+
+  
+@media (min-width: 1025px){
+  .switchTabsWrapper{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 938px;
+}
+.ant-tabs-nav-wrap {
+    justify-content: center ;
+    font-size: 14px;
+  }
+  .ant-tabs-nav::before {
+    display: none;
+  }
+}
+@media (min-width: 428px ) and (max-width: 1024px){
+  .switchTabsWrapper{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 388px;
+}
+.ant-tabs-nav-wrap {
+    justify-content: center ;
+    font-size: 14px;
+  }
+  .ant-tabs-nav::before {
+    display: none;
+  }
+}
+

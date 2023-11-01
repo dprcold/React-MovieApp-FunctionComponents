@@ -1,0 +1,33 @@
+
+@media (min-width: 1025px){
+    .ratedMovies{
+        padding-top: 20px;
+        display: flex;
+        margin: 0 auto;
+        flex-wrap: wrap; /* Разрешает перенос элементов на новую строку */
+        gap: 36px;
+     
+    }
+    .spinRatedTab{
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+}
+@media  (min-width: 388px ) and (max-width: 1024px){
+    .ratedMovies{
+        padding-top: 10px;
+        display: flex;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        gap: 15px;
+        width: 388px;
+    }
+    .spinRatedTab{
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+}
