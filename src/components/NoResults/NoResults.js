@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert, Space } from 'antd';
-const NoResults = () => (
+export const NoResults = () => (
   <Space
     direction="vertical"
     style={{
@@ -10,4 +10,3 @@ const NoResults = () => (
     <Alert message="Oops... No results found :(" type="info" showIcon closable />
   </Space>
 );
-export default NoResults;

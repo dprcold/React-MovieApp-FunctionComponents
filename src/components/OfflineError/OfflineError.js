@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert, Space } from 'antd';
-const OfflineError = () => (
+export const OfflineError = () => (
   <Space
     direction="vertical"
     style={{
@@ -15,4 +15,3 @@ const OfflineError = () => (
     />
   </Space>
 );
-export default OfflineError;

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import SessionIdContext from '../contexts/SessionIdContext';
+import { SessionIdContext } from '../contexts/SessionIdContext';
 import { addRatingPost } from '../ApiClient/ApiClient';
 import './MovieCard.css';
 const calculateRatingRound = (rating) => Math.ceil(rating * 10) / 10;
 
-export default function MovieCard({
+export function MovieCard({
   img = '',
   tittle = '',
   cardDate = '',

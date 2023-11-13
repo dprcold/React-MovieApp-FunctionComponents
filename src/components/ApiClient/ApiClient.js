@@ -7,6 +7,9 @@ const apiKey = '53b21194b2d794150bea2816688e5f9e';
 const token =
   'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1M2IyMTE5NGIyZDc5NDE1MGJlYTI4MTY2ODhlNWY5ZSIsInN1YiI6IjY1M2E3MjhmYWUzNjY4MDBjNWI5MDRlNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JSzn8vonl7qjaqptWYLglIKJ8zLxTNMXshBXQu0Bb7w';
 
+const errorHandler = (error, customMessage = 'Произошла ошибка') => {
+  console.error(`${customMessage}:`, error);
+};
 export async function getMovie(value, page) {
   const headers = new Headers({
     Authorization: `Bearer ${token}`,
@@ -53,7 +56,7 @@ export async function getGenre() {
     const result = responseData.genres;
     return result;
   } catch (error) {
-    console.error('Произошла ошибка:', error);
+    return errorHandler(error, 'get genres');
   }
 }
 
@@ -74,7 +77,7 @@ export async function createGuestSession() {
     const result = responseData.guest_session_id;
     return result;
   } catch (error) {
-    console.error('Произошла ошибка:', error);
+    return errorHandler(error, 'create session');
   }
 }
 
@@ -93,7 +96,7 @@ export async function addRatingPost(sessionId, movieId, rating) {
   try {
     await fetch(urlWithParams, requestOptions);
   } catch (error) {
-    console.error('Произошла ошибка:', error);
+    return errorHandler(error, 'add rating');
   }
 }
 
@@ -110,6 +113,6 @@ export async function getGuestSessionRatings(sessionId, numberPage) {
     const result = responseData;
     return result;
   } catch (error) {
-    console.error('Произошла ошибка:', error);
+    return errorHandler(error, 'get rated movies');
   }
 }

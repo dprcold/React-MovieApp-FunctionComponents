@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert, Space } from 'antd';
-const AlertError = () => (
+
+export const AlertError = () => (
   <Space
     direction="vertical"
     style={{
@@ -17,4 +18,3 @@ const AlertError = () => (
     />
   </Space>
 );
-export default AlertError;

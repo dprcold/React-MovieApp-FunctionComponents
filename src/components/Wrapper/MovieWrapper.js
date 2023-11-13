@@ -3,12 +3,12 @@ import { Spin } from 'antd';
 import { format, parseISO } from 'date-fns';
 import PropTypes from 'prop-types';
 
-import RatingMovieStars from '../RatingMovieStars/RatingMovieStars';
-import GenreContext from '../contexts/GenreContext';
+import { RatingMovieStars } from '../RatingMovieStars/RatingMovieStars';
+import { GenreContext } from '../contexts/GenreContext';
 import './Wrapper.css';
-import MovieCard from '../MovieCard/MovieCard';
+import { MovieCard } from '../MovieCard/MovieCard';
 
-export default function MovieWrapper({ results = [], loading = false, dataWithRatedMovies = [] }) {
+export function MovieWrapper({ results = [], loading = false, dataWithRatedMovies = [] }) {
   const isRating = true;
   const checkTextLength = (text) => {
     let arrayFromText = text.split(' ');
@@ -65,5 +65,5 @@ export default function MovieWrapper({ results = [], loading = false, dataWithRa
 MovieWrapper.propTypes = {
   results: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  dataWithRatedMovies: PropTypes.array.isRequired,
+  dataWithRatedMovies: PropTypes.array,
 };

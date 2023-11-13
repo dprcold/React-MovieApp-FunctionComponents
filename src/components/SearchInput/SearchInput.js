@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Input, Pagination } from 'antd';
 import { Offline } from 'react-detect-offline';
-import debounce from 'lodash.debounce';
+import { useDebouncedCallback } from 'use-debounce';
 
-import SessionIdContext from '../contexts/SessionIdContext';
-import NoResults from '../NoResults/NoResults';
-import OfflineError from '../OfflineError/OfflineError';
-import AlertError from '../AlertError/AlertError';
+import { SessionIdContext } from '../contexts/SessionIdContext';
+import { NoResults } from '../NoResults/NoResults';
+import { OfflineError } from '../OfflineError/OfflineError';
+import { AlertError } from '../AlertError/AlertError';
 import { getMovie, getGuestSessionRatings } from '../ApiClient/ApiClient';
 import './SearchInput.css';
-import MovieWrapper from '../Wrapper/MovieWrapper';
+import { MovieWrapper } from '../Wrapper/MovieWrapper';
 
-const SearchInput = () => {
+export const SearchInput = () => {
   const [inputValue, setInputValue] = useState('');
-  const [debouncedValue, setDebouncedValue] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -35,27 +34,17 @@ const SearchInput = () => {
     setLoading(false);
   }, [results]);
 
-  const debouncedInput = useRef(debounce((value) => setDebouncedValue(value), 700));
-
-  useEffect(() => {
-    if (inputValue.trim() === '') {
-      setCurrentPagination(1);
-      setShowNoResults(false);
-      setError(false);
-      setShowPagination(false);
-    }
-    debouncedInput.current(inputValue);
-  }, [inputValue]);
-
   const searchMovies = async (query, pageNumber) => {
     setLoading(true);
     try {
-      const getRatedMovies = await getGuestSessionRatings(sessionId, pageNumber);
-      const getRatedMoviesData = getRatedMovies.results;
+      if (sessionId) {
+        const getRatedMovies = await getGuestSessionRatings(sessionId, pageNumber);
+        const getRatedMoviesData = getRatedMovies.results;
+        setDataWithRatedMovies(getRatedMoviesData);
+      }
       const response = await getMovie(query, pageNumber);
       const resultArray = response.results;
       const pages = response.total_pages;
-      setDataWithRatedMovies(getRatedMoviesData);
       setPagesNum(pages);
       setResults(resultArray);
 
@@ -79,22 +68,31 @@ const SearchInput = () => {
     }
   };
 
-  useEffect(() => {
-    if (debouncedValue) {
-      searchMovies(debouncedValue, currentPagination);
-    }
-  }, [debouncedValue, currentPagination]);
-
   const onChangePage = (page) => {
     setCurrentPagination(page);
   };
+  const debounced = useDebouncedCallback((value) => {
+    setInputValue(value);
+  }, 1000);
+
+  useEffect(() => {
+    if (inputValue.trim() === '') {
+      setCurrentPagination(1);
+      setShowNoResults(false);
+      setError(false);
+      setShowPagination(false);
+      return;
+    }
+    if (debounced) {
+      searchMovies(inputValue, currentPagination);
+    }
+  }, [inputValue, currentPagination]);
 
   return (
     <div className="input-wrapper">
       <Input
         placeholder="Type to search..."
-        value={inputValue}
-        onChange={(event) => setInputValue(event.target.value)}
+        onChange={(event) => debounced(event.target.value)}
         onFocus={onFocusChange}
         onBlur={onBlurChange}
       />
@@ -121,5 +119,3 @@ const SearchInput = () => {
     </div>
   );
 };
-
-export default SearchInput;

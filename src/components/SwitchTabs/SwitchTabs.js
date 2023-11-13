@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Tabs } from 'antd';
 
 import { getGenre } from '../ApiClient/ApiClient';
-import GenreContext from '../contexts/GenreContext';
-import SearchInput from '../SearchInput/SearchInput';
-import RatedTab from '../RatedTab/RatedTab';
+import { GenreContext } from '../contexts/GenreContext';
+import { SearchInput } from '../SearchInput/SearchInput';
+import { RatedTab } from '../RatedTab/RatedTab';
 import './SwitchTabs.css';
 
-const SwitchTabs = () => {
+export const SwitchTabs = () => {
   const [genreData, setGenreData] = useState([]);
-  const [updateMovieList, setUpdateMovieList] = useState(false);
+  const [key, setKey] = useState('1');
 
   const items = [
     {
@@ -20,18 +20,9 @@ const SwitchTabs = () => {
     {
       key: '2',
       label: 'Rated',
-      children: <RatedTab updateMovieList={updateMovieList} />,
+      children: <RatedTab updateMovieList={key === '2'} />,
     },
   ];
-
-  const handleClickOnTab = (key) => {
-    if (key === '2') {
-      setUpdateMovieList(true);
-    }
-    if (key === '1') {
-      setUpdateMovieList(false);
-    }
-  };
 
   useEffect(() => {
     getGenre().then((result) => setGenreData(result));
@@ -40,9 +31,8 @@ const SwitchTabs = () => {
   return (
     <GenreContext.Provider value={genreData}>
       <div className="switchTabsWrapper">
-        <Tabs defaultActiveKey="1" items={items} onTabClick={handleClickOnTab} />
+        <Tabs defaultActiveKey="1" items={items} onTabClick={setKey} />
       </div>
     </GenreContext.Provider>
   );
 };
-export default SwitchTabs;

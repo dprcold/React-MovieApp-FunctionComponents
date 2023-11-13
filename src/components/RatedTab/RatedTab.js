@@ -5,13 +5,13 @@ import { Pagination } from 'antd';
 import { format, parseISO } from 'date-fns';
 import PropTypes from 'prop-types';
 
-import SessionIdContext from '../contexts/SessionIdContext';
-import GenreContext from '../contexts/GenreContext';
+import { SessionIdContext } from '../contexts/SessionIdContext';
+import { GenreContext } from '../contexts/GenreContext';
 import { getGuestSessionRatings } from '../ApiClient/ApiClient';
-import MovieCard from '../MovieCard/MovieCard';
-import RatedTabRatingMovieStars from '../RatingMovieStars/RatedTabRatingMovieStars';
+import { MovieCard } from '../MovieCard/MovieCard';
+import { RatedTabRatingMovieStars } from '../RatingMovieStars/RatedTabRatingMovieStars';
 
-export default function RatedTab({ updateMovieList }) {
+export function RatedTab({ updateMovieList }) {
   const [ratedMovies, setRatedMovies] = useState([]);
   const [totalPages, setTotalPage] = useState(1);
   const [page, setPage] = useState(1);
